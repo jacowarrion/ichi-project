@@ -10,8 +10,8 @@ import java.util.Collections;
 
 public class Player {
 
-    private int _id = 0;
-    private String _username = "Username";
+    private int _id;
+    private String _username;
     private ArrayList<Card> _hand = new ArrayList<>();
 
     public Player(int id, String username) {
@@ -19,8 +19,10 @@ public class Player {
         this._username = username;
     }
 
-    public boolean draw(int count, CardManager cm) {
-        return Collections.addAll(_hand, cm.draw(count));
+    public Card[] draw(int count, GameManager gm) {
+        Card[] drawnCards = gm.draw(count);
+        Collections.addAll(_hand, drawnCards);
+        return drawnCards;
     }
 
     public void play(int index) {
@@ -37,6 +39,10 @@ public class Player {
 
     public String get_username() {
         return _username;
+    }
+
+    public ArrayList<Card> getHand(){
+        return _hand;
     }
 
     @NonNull

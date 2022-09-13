@@ -7,7 +7,7 @@ import com.example.ichiproject.enums.EnCardEffect;
 
 public class Card implements ICard {
 
-    private final EnCardColor _color;
+    private EnCardColor _color;
     private final EnCardEffect _effect;
     private boolean _effectActive;
 
@@ -26,6 +26,9 @@ public class Card implements ICard {
     public EnCardColor getColor() {
         return this._color;
     }
+    public EnCardColor setColor(EnCardColor color) {
+        return _color = color;
+    }
 
     @NonNull
     @Override
@@ -40,11 +43,11 @@ public class Card implements ICard {
     @NonNull
     @Override
     public String toString() {
-        return "Card{" +
-                "_color=" + _color +
-                ", _effect=" + _effect +
-                ", _number=" + _number +
-                '}';
+        if(_number < 0 ) {
+            if (_color == EnCardColor.NULL) return "Card{" + _effect + '}';
+            else return "Card{" + _effect + "-" + _color + '}';
+        }
+        else return "Card{" + _color + "-" + _number + '}';
     }
 
     /**
