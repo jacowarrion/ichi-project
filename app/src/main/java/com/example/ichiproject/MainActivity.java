@@ -2,11 +2,13 @@ package com.example.ichiproject;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 
+import com.example.ichiproject.game.OfflineGameActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,7 +41,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         System.out.println("STARTO");
-        initP2p();
+
+        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout),
+                R.string.wip, Snackbar.LENGTH_SHORT);
+
+        findViewById(R.id.offlineButton).setOnClickListener(view -> {
+            Intent intent = new Intent(this, OfflineGameActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.onlineButton).setOnClickListener(view -> mySnackbar.show());
+
+
+        //mySnackbar.setAction("aaa", new MyUndoListener());
+
+        /* initP2p();
         findViewById(R.id.server).setOnClickListener(view -> {
             System.out.println("CLICKKK");
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -62,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             });
-        });
+        });*/
     }
 
     /* register the broadcast receiver with the intent values to be matched */

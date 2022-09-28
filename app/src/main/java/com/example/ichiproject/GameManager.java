@@ -3,6 +3,7 @@ package com.example.ichiproject;
 import com.example.ichiproject.cards.Card;
 import com.example.ichiproject.enums.EnCardColor;
 import com.example.ichiproject.enums.EnCardEffect;
+import com.example.ichiproject.players.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,7 +49,7 @@ public class GameManager {
 
         // prima carta numero
         int i = 0;
-        while (!_deck.get(i).getEffect().equals(EnCardEffect.NULL)){
+        while (!_deck.get(i).getEffect().equals(EnCardEffect.NULL)) {
             i++;
         }
         _fieldDeck.add(_deck.remove(i));
@@ -62,7 +63,7 @@ public class GameManager {
      * @return Carte pescate
      */
     public Card[] draw(int count) {
-        if(count > _deck.size()){
+        if (count > _deck.size()) {
             refillDeck();
         }
         Card[] drawnCards = new Card[count];
@@ -74,13 +75,14 @@ public class GameManager {
 
     /**
      * Ritorna l'ultima carta giocata
+     *
      * @return Carta
      */
     public Card getLastCardPlayed() {
         return _fieldDeck.get(_fieldDeck.size() - 1);
     }
 
-    private void refillDeck(){
+    private void refillDeck() {
         System.out.println("REFILL");
         _deck.addAll(_fieldDeck);
         _fieldDeck.clear();
@@ -110,15 +112,18 @@ public class GameManager {
     /**
      * Risolve l'effetto della carta e da il comando al giocatore successivo
      */
-    public boolean nextTurn() {
-        if(_players.size() <= 1){
+    public void nextTurn() {
+        if (_players.size() <= 1) {
             System.out.println("fine");
-            return false;
+            return;
         }
         Card lastPlayed = getLastCardPlayed();
         EnCardEffect lastEffect = lastPlayed.isEffectActive() ? lastPlayed.getEffect() : EnCardEffect.NULL;
         switch (lastEffect) {
             case SKIP:
+                nextPlayer();
+                nextPlayer();
+            break;
             case WILD_DRAW_FOUR: {
                 nextPlayer();
                 _players.get(_currentPlayer).draw(4, this);
@@ -146,23 +151,27 @@ public class GameManager {
                 break;
         }
         lastPlayed.disableEffect();
-        return true;
+        _players.get(_currentPlayer).playTurn(this);
     }
 
-    private void nextPlayer(){
+    private void nextPlayer() {
         _currentPlayer += _currentRotation;
-        if(_currentPlayer >= _players.size()) _currentPlayer = 0;
-        if(_currentPlayer < 0) _currentPlayer = _players.size() -1 ;
+        if (_currentPlayer >= _players.size()) _currentPlayer = 0;
+        if (_currentPlayer < 0) _currentPlayer = _players.size() - 1;
     }
 
     public boolean playCard(Player player, Card card) {
         if (!canPlayCard(card)) return false;
         player.getHand().remove(card);
-        if(player.getHand().isEmpty()){
+        if (player.getHand().isEmpty()) {
             System.out.println("\n\n\nVICOTRY\n\n\n");
             _players.remove(player);
         }
         return _fieldDeck.add(card);
+    }
+
+    public boolean isGameOver(){
+        return _players.size() == 1;
     }
 
     /**
@@ -180,14 +189,15 @@ public class GameManager {
 
     /**
      * ritorna le carte giocabili che un player ha in mano
+     *
      * @param player Player
      * @return le carte giocabili di un player
      */
-    public ArrayList<Card> getPlayableCardsForPlayer(Player player){
+    public ArrayList<Card> getPlayableCardsForPlayer(Player player) {
         ArrayList<Card> playerHand = player.getHand();
         ArrayList<Card> playableCards = new ArrayList<>();
         for (Card card : playerHand) {
-            if (this.canPlayCard(card)){
+            if (this.canPlayCard(card)) {
                 playableCards.add(card);
             }
         }
@@ -196,14 +206,16 @@ public class GameManager {
 
     /**
      * ritorna l'ultima carta giocata
+     *
      * @return l'ultima carta giocata
      */
-    public Card getLastPlayedCard(){
+    public Card getLastPlayedCard() {
         return getLastCardPlayed();
     }
 
     /**
      * Ritorna il player corrente
+     *
      * @return player corrente
      */
     public Player getCurrentPlayer() {

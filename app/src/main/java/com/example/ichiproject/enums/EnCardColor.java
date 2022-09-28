@@ -9,6 +9,10 @@ public enum EnCardColor {
     RED,
     GREEN,
     BLUE,
-    NULL
+    NULL;
+
+    public static EnCardColor[] getColors(){
+        return new EnCardColor[]{YELLOW,RED,GREEN,BLUE};
+    }
 
 }

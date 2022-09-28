@@ -1,8 +1,10 @@
-package com.example.ichiproject;
+package com.example.ichiproject.players;
 
 import androidx.annotation.NonNull;
 
+import com.example.ichiproject.GameManager;
 import com.example.ichiproject.cards.Card;
+import com.example.ichiproject.enums.EnCardColor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,9 +12,9 @@ import java.util.Collections;
 
 public class Player {
 
-    private int _id;
-    private String _username;
-    private ArrayList<Card> _hand = new ArrayList<>();
+    private final int _id;
+    private final String _username;
+    private final ArrayList<Card> _hand = new ArrayList<>();
 
     public Player(int id, String username) {
         this._id = id;
@@ -25,8 +27,24 @@ public class Player {
         return drawnCards;
     }
 
-    public void play(int index) {
-        _hand.remove(index);
+    public void playTurn(GameManager gameManager) {
+        ArrayList<Card> playableCards = gameManager.getPlayableCardsForPlayer(this);
+        if(playableCards.size() > 0) playCard(gameManager, playableCards.get(0));
+        gameManager.nextTurn();
+    }
+
+    public void playCard(GameManager gameManager, Card card){
+        switch (card.getEffect()){
+            case WILD:
+                card.setColor(EnCardColor.BLUE);
+                break;
+            case WILD_DRAW_FOUR:
+                card.setColor(EnCardColor.RED);
+                break;
+            default:
+                break;
+        }
+        gameManager.playCard(this, card);
     }
 
     public Card selectCard(int index) {

@@ -2,6 +2,7 @@ package com.example.ichiproject.cards;
 
 import androidx.annotation.NonNull;
 
+import com.example.ichiproject.R;
 import com.example.ichiproject.enums.EnCardColor;
 import com.example.ichiproject.enums.EnCardEffect;
 
@@ -26,6 +27,22 @@ public class Card implements ICard {
     public EnCardColor getColor() {
         return this._color;
     }
+
+    public int getColorId() {
+        switch (_color) {
+            case RED:
+                return R.color.red;
+            case BLUE:
+                return R.color.blue;
+            case GREEN:
+                return R.color.green;
+            case YELLOW:
+                return R.color.yellow;
+            default:
+                return R.color.black;
+        }
+    }
+
     public EnCardColor setColor(EnCardColor color) {
         return _color = color;
     }
@@ -43,11 +60,10 @@ public class Card implements ICard {
     @NonNull
     @Override
     public String toString() {
-        if(_number < 0 ) {
+        if (_number < 0) {
             if (_color == EnCardColor.NULL) return "Card{" + _effect + '}';
             else return "Card{" + _effect + "-" + _color + '}';
-        }
-        else return "Card{" + _color + "-" + _number + '}';
+        } else return "Card{" + _color + "-" + _number + '}';
     }
 
     /**

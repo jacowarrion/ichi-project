@@ -2,13 +2,14 @@ package com.example.ichiproject;
 
 import com.example.ichiproject.cards.Card;
 import com.example.ichiproject.enums.EnCardColor;
+import com.example.ichiproject.players.Bot;
+import com.example.ichiproject.players.Player;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Scanner;
 
 public class TestGameManager {
 
@@ -18,10 +19,10 @@ public class TestGameManager {
     public void drawCard(){
         GameManager gm = new GameManager();
 
-        Player p1 = new Player(1,"Player1");
-        Player p2 = new Player(2,"Player2");
-        Player p3 = new Player(3,"Player3");
-        Player p4 = new Player(4,"Player4");
+        Bot p1 = new Bot(1,"Player1");
+        Bot p2 = new Bot(2,"Player2");
+        Bot p3 = new Bot(3,"Player3");
+        Bot p4 = new Bot(4,"Player4");
 
         gm.addPlayer(p1);
         gm.addPlayer(p2);
@@ -30,9 +31,9 @@ public class TestGameManager {
 
         gm.init();
 
-        while (gm.nextTurn()){
+        while (!gm.isGameOver()){
             Player p = gm.getCurrentPlayer();
-            playerCycle(gm, p);
+            p.playTurn(gm);
         }
         /*
         gm.nextTurn();

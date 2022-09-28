@@ -4,17 +4,18 @@
     package="com.example.ichiproject">
 
     <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
         android:required="true"
-        android:name="android.permission.ACCESS_FINE_LOCATION"/>
+        tools:ignore="CoarseFineLocation" />
     <uses-permission
-        android:required="true"
-        android:name="android.permission.ACCESS_WIFI_STATE"/>
+        android:name="android.permission.ACCESS_WIFI_STATE"
+        android:required="true" />
     <uses-permission
-        android:required="true"
-        android:name="android.permission.CHANGE_WIFI_STATE"/>
+        android:name="android.permission.CHANGE_WIFI_STATE"
+        android:required="true" />
     <uses-permission
-        android:required="true"
-        android:name="android.permission.INTERNET"/>
+        android:name="android.permission.INTERNET"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -25,8 +26,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IchiProject"
-
         tools:targetApi="31">
+        <activity
+            android:name=".game.OfflineGameActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
