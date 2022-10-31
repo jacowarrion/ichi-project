@@ -6,31 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".game.OfflineGameActivity">
 
-    <LinearLayout
+    <HorizontalScrollView
+        android:id="@+id/bot1Hand_scroll"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:forceHasOverlappingRendering="true"
+        android:orientation="horizontal"
+        android:overScrollMode="always"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:id="@+id/bot1Hand"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:id="@+id/bot2Hand_scroll"
         android:layout_width="150dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
-        android:background="@color/purple_200"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/playerHand_scroll"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="200dp"
+        android:forceHasOverlappingRendering="true"
+        android:orientation="horizontal"
+        android:overScrollMode="always"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        tools:ignore="SpeakableTextPresentCheck">
 
-    <LinearLayout
+        <LinearLayout
+            android:id="@+id/bot2Hand"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:id="@+id/bot3Hand_scroll"
         android:layout_width="150dp"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
-        android:background="@color/purple_200"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/playerHand_scroll"
+        android:layout_marginBottom="200dp"
+        android:forceHasOverlappingRendering="true"
+        android:orientation="horizontal"
+        android:overScrollMode="always"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:id="@+id/bot3Hand"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:id="@+id/field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"></LinearLayout>
 
     <HorizontalScrollView
         android:id="@+id/playerHand_scroll"
@@ -53,22 +118,27 @@
             android:id="@+id/playerHand"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal" />
 
     </HorizontalScrollView>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
+    <Button
+        android:id="@+id/drawCardBtn"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:text="draw a card"
+        app:layout_constraintBottom_toTopOf="@+id/playerHand_scroll"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/playCardBtn"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="32dp"
-        android:background="@color/purple_200"
-        android:orientation="horizontal"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/playerHand_scroll"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:text="play the card" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

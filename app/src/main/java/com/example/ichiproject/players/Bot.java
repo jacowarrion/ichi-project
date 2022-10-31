@@ -39,7 +39,7 @@ public class Bot extends Player{
         gameManager.nextTurn();
     }
 
-    public void playCard(GameManager gameManager, Card card){
+    public boolean playCard(GameManager gameManager, Card card){
         switch (card.getEffect()){
             case WILD:
             case WILD_DRAW_FOUR:
@@ -47,7 +47,7 @@ public class Bot extends Player{
             default:
                 break;
         }
-        gameManager.playCard(this, card);
+        return gameManager.playCard(this, card);
     }
 
 }

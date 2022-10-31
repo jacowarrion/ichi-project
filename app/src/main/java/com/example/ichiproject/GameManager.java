@@ -3,6 +3,7 @@ package com.example.ichiproject;
 import com.example.ichiproject.cards.Card;
 import com.example.ichiproject.enums.EnCardColor;
 import com.example.ichiproject.enums.EnCardEffect;
+import com.example.ichiproject.players.Bot;
 import com.example.ichiproject.players.Player;
 
 import java.util.ArrayList;
@@ -151,7 +152,9 @@ public class GameManager {
                 break;
         }
         lastPlayed.disableEffect();
-        _players.get(_currentPlayer).playTurn(this);
+        if(_players.get(_currentPlayer) instanceof Bot){
+            _players.get(_currentPlayer).playTurn(this);
+        }
     }
 
     private void nextPlayer() {
@@ -167,6 +170,7 @@ public class GameManager {
             System.out.println("\n\n\nVICOTRY\n\n\n");
             _players.remove(player);
         }
+        nextTurn();
         return _fieldDeck.add(card);
     }
 

@@ -28,12 +28,14 @@ public class Player {
     }
 
     public void playTurn(GameManager gameManager) {
-        ArrayList<Card> playableCards = gameManager.getPlayableCardsForPlayer(this);
-        if(playableCards.size() > 0) playCard(gameManager, playableCards.get(0));
-        gameManager.nextTurn();
+        //ArrayList<Card> playableCards = gameManager.getPlayableCardsForPlayer(this);
+        //if(playableCards.size() > 0) playCard(gameManager, playableCards.get(0));
+        //gameManager.nextTurn();
     }
 
-    public void playCard(GameManager gameManager, Card card){
+    public boolean playCard(GameManager gameManager, Card card){
+        System.out.println(gameManager.getCurrentPlayer().get_id() + " - " + get_id());
+        if(gameManager.getCurrentPlayer().get_id() != get_id()) return false;
         switch (card.getEffect()){
             case WILD:
                 card.setColor(EnCardColor.BLUE);
@@ -44,7 +46,7 @@ public class Player {
             default:
                 break;
         }
-        gameManager.playCard(this, card);
+        return gameManager.playCard(this, card);
     }
 
     public Card selectCard(int index) {
